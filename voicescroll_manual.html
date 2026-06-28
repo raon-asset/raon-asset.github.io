@@ -1,48 +1,175 @@
-<!DOCTYPE html> <html lang="ko"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>VoiceScroll 사용설명서</title> <style> body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f9; } h1 { color: #0066FF; border-bottom: 2px solid #0066FF; padding-bottom: 10px; } h2 { color: #333; margin-top: 30px; background: #e7efff; padding: 10px; border-left: 5px solid #0066FF; } .feature { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); } .premium { color: #9C27B0; font-weight: bold; } code { background: #eee; padding: 2px 5px; border-radius: 3px; font-weight: bold; } ul { padding-left: 20px; } li { margin-bottom: 8px; } .footer { margin-top: 50px; text-align: center; font-size: 0.9em; color: #777; } </style> </head> <body> <h1>🚀 VoiceScroll 사용설명서 (v1.2.3)</h1> <p>VoiceScroll은 음성 명령을 통해 스마트폰 화면을 손대지 않고 제어할 수 있는 혁신적인 접근성 도구입니다. 웹툰, 뉴스, SNS 등을 이용할 때 최상의 편의성을 제공합니다.</p>
-<h2>1. 시작하기</h2>
-<div class="feature">
-    <ul>
-        <li><strong>서비스 활성화</strong>: 앱 우측 하단의 [서비스 활성화] 버튼을 눌러 안드로이드 설정에서 VoiceScroll 접근성 서비스를 '사용 중'으로 변경하세요.</li>
-        <li><strong>버튼 표시</strong>: 메인 화면의 [시작] 버튼을 누르면 화면에 파란색 플로팅 버튼이 나타납니다.</li>
-        <li><strong>음성 인식 시작</strong>: 플로팅 버튼을 한 번 터치하면 마이크가 활성화되며 음성 명령을 대기합니다. *동영상에서 안드로이드 기본 음성 인식(Google SpeechRecognizer)의 시스템적인 한계 때문에 음성인식 모드는 소리가 끊기는 현상이 발생합니다. 동영상에서는 사용을 자제해주세요.</li>
-    </ul>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceScroll 사용설명서 / User Manual</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f9; }
+        h1 { color: #0066FF; border-bottom: 2px solid #0066FF; padding-bottom: 10px; }
+        h2 { color: #333; margin-top: 30px; background: #e7efff; padding: 10px; border-left: 5px solid #0066FF; }
+        .feature { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .premium { color: #9C27B0; font-weight: bold; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .footer { margin-top: 50px; text-align: center; font-size: 0.9em; color: #777; }
+        
+        .lang-switcher { text-align: right; margin-bottom: 15px; font-weight: bold; }
+        .lang-switcher button { 
+            background: none; border: 1px solid #0066FF; border-radius: 15px; 
+            padding: 5px 15px; margin-left: 5px; cursor: pointer; color: #0066FF; 
+            font-size: 0.9em; font-weight: bold; transition: all 0.2s;
+        }
+        .lang-switcher button.active { background-color: #0066FF; color: white; }
+        
+        /* Language display control */
+        [data-lang="en"] { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="lang-switcher">
+    <button id="btn-ko" class="active" onclick="setLang('ko')">한국어</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
 </div>
 
-<h2>2. 기본 음성 명령어</h2>
-<div class="feature">
-    <ul>
-        <li><code>내려</code> / <code>올려</code>: 화면을 1회 살짝 스크롤합니다.</li>
-        <li><code>시작</code>: 아래 방향으로 자동 스크롤을 무한히 시작합니다.</li>
-        <li><code>멈춰</code> / <code>정지</code>: 모든 스크롤 동작을 즉시 중단합니다.</li>
-        <li><code>빨리</code> / <code>천천히</code>: 스크롤이 움직이는 속도를 조절합니다.</li>
-        <li><code>처음으로</code> / <code>끝으로</code>: 화면의 맨 위 또는 맨 아래로 즉시 이동합니다.</li>
-        <li><code>뒤로</code>: 시스템 '뒤로가기' 동작을 수행합니다.</li>
-        <li><code>클릭</code>: 화면의 정중앙을 1회 터치합니다.</li>
-    </ul>
+<!-- Korean Content -->
+<div data-lang="ko">
+    <h1>🚀 VoiceScroll 사용설명서 (v1.2.3)</h1>
+    <p>VoiceScroll은 음성 명령을 통해 스마트폰 화면을 손대지 않고 제어할 수 있는 혁신적인 접근성 도구입니다. 웹툰, 뉴스, SNS 등을 이용할 때 최상의 편의성을 제공합니다.</p>
+    
+    <h2>1. 시작하기</h2>
+    <div class="feature">
+        <ul>
+            <li><strong>서비스 활성화</strong>: 앱 우측 하단의 [서비스 활성화] 버튼을 눌러 안드로이드 설정에서 VoiceScroll 접근성 서비스를 '사용 중'으로 변경하세요.</li>
+            <li><strong>버튼 표시</strong>: 메인 화면의 [시작] 버튼을 누르면 화면에 파란색 플로팅 버튼이 나타납니다.</li>
+            <li><strong>음성 인식 시작</strong>: 플로팅 버튼을 한 번 터치하면 마이크가 활성화되며 음성 명령을 대기합니다. *동영상에서 안드로이드 기본 음성 인식(Google SpeechRecognizer)의 시스템적인 한계 때문에 음성인식 모드는 소리가 끊기는 현상이 발생합니다. 동영상에서는 사용을 자제해주세요.</li>
+        </ul>
+    </div>
+    
+    <h2>2. 기본 음성 명령어</h2>
+    <div class="feature">
+        <ul>
+            <li><code>내려</code> / <code>올려</code>: 화면을 1회 살짝 스크롤합니다.</li>
+            <li><code>시작</code>: 아래 방향으로 자동 스크롤을 무한히 시작합니다.</li>
+            <li><code>멈춰</code> / <code>정지</code>: 모든 스크롤 동작을 즉시 중단합니다.</li>
+            <li><code>빨리</code> / <code>천천히</code>: 스크롤이 움직이는 속도를 조절합니다.</li>
+            <li><code>처음으로</code> / <code>끝으로</code>: 화면의 맨 위 또는 맨 아래로 즉시 이동합니다.</li>
+            <li><code>뒤로</code>: 시스템 '뒤로가기' 동작을 수행합니다.</li>
+            <li><code>클릭</code>: 화면의 정중앙을 1회 터치합니다.</li>
+        </ul>
+    </div>
+    
+    <h2>3. 프리미엄 기능 (Premium)</h2>
+    <div class="feature">
+        <ul>
+            <li><span class="premium">광고 제거</span>: 앱 내의 모든 배너 및 전면 광고가 사라집니다.</li>
+            <li><span class="premium">자동 실행 앱 설정</span>: 특정 앱(예: 크롬, 카카오페이지)을 열 때 보이스스크롤이 자동으로 켜지도록 설정할 수 있습니다.</li>
+            <li><span class="premium">커스텀 명령어</span>: "내려" 대신 "넥스트", "고" 등 본인이 원하는 단어로 명령어를 바꿀 수 있습니다.</li>
+            <li><span class="premium">모드 전환</span>: 순환버튼으로 <code>웹툰모드</code>, <code>뉴스모드</code>, <code>릴스모드</code>를 즉시 최적화된 설정으로 적용할 수 있습니다.</li>
+            <li><span class="premium">정밀 튜닝</span>: 각 모드별 스크롤 속도, 이동 거리, 대기 시간을 0.1초 단위로 세밀하게 조절 가능합니다.</li>
+        </ul>
+    </div>
+    
+    <h2>4. 꿀팁 및 주의사항</h2>
+    <div class="feature">
+        <ul>
+            <li><strong>24시간 무료 체험</strong>: 광고 30초 시청 시 24시간 동안 모든 프리미엄 기능을 무료로 이용할 수 있습니다.</li>
+            <li><strong>정지 버튼 길게 누르기</strong>: 플로팅 버튼 중 정지(■) 버튼을 길게 누르면 보이스스크롤 서비스가 즉시 종료됩니다.</li>
+            <li><strong>안전 범위</strong>: 시스템 상단 바와의 충돌을 방지하기 위해 화면의 중앙 80% 영역 내에서 제스처가 작동합니다.</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        © 2024 Raon Asset. All rights reserved.<br>
+        문의: voicescroll.help@gmail.com
+    </div>
 </div>
 
-<h2>3. 프리미엄 기능 (Premium)</h2>
-<div class="feature">
-    <ul>
-        <li><span class="premium">광고 제거</span>: 앱 내의 모든 배너 및 전면 광고가 사라집니다.</li>
-        <li><span class="premium">자동 실행 앱 설정</span>: 특정 앱(예: 크롬, 카카오페이지)을 열 때 보이스스크롤이 자동으로 켜지도록 설정할 수 있습니다.</li>
-        <li><span class="premium">커스텀 명령어</span>: "내려" 대신 "넥스트", "고" 등 본인이 원하는 단어로 명령어를 바꿀 수 있습니다.</li>
-        <li><span class="premium">모드 전환</span>: 순환버튼으로 <code>웹툰모드</code>, <code>뉴스모드</code>, <code>릴스모드</code>를 즉시 최적화된 설정으로 적용할 수 있습니다.</li>
-        <li><span class="premium">정밀 튜닝</span>: 각 모드별 스크롤 속도, 이동 거리, 대기 시간을 0.1초 단위로 세밀하게 조절 가능합니다.</li>
-    </ul>
+<!-- English Content -->
+<div data-lang="en">
+    <h1>🚀 VoiceScroll User Manual (v1.2.3)</h1>
+    <p>VoiceScroll is an innovative accessibility tool that allows you to control your smartphone screen hands-free via voice commands. It provides maximum convenience when using webtoons, news, SNS, etc.</p>
+    
+    <h2>1. Getting Started</h2>
+    <div class="feature">
+        <ul>
+            <li><strong>Activate Service</strong>: Press the [Activate Service] button at the bottom right of the app and change the VoiceScroll accessibility service to 'On' in Android settings.</li>
+            <li><strong>Show Button</strong>: Press the [Start] button on the main screen, and a blue floating button will appear on the screen.</li>
+            <li><strong>Start Voice Recognition</strong>: Touch the floating button once to activate the microphone and wait for voice commands. *Due to the system limitations of Android's default voice recognition (Google SpeechRecognizer), the voice recognition mode may cause audio stuttering in videos. Please refrain from using it while watching videos.</li>
+        </ul>
+    </div>
+    
+    <h2>2. Basic Voice Commands</h2>
+    <div class="feature">
+        <ul>
+            <li><code>Down</code> / <code>Up</code>: Scrolls the screen slightly once.</li>
+            <li><code>Start</code>: Starts auto-scrolling downwards infinitely.</li>
+            <li><code>Stop</code>: Immediately stops all scrolling actions.</li>
+            <li><code>Faster</code> / <code>Slower</code>: Adjusts the scrolling speed.</li>
+            <li><code>To Start</code> / <code>To End</code>: Instantly jumps to the top or bottom of the screen.</li>
+            <li><code>Back</code>: Performs the system 'Back' action.</li>
+            <li><code>Click</code>: Touches the exact center of the screen once.</li>
+        </ul>
+    </div>
+    
+    <h2>3. Premium Features (Premium)</h2>
+    <div class="feature">
+        <ul>
+            <li><span class="premium">Remove Ads</span>: All banner and interstitial ads within the app will be removed.</li>
+            <li><span class="premium">Auto-Start Apps</span>: You can set VoiceScroll to turn on automatically when you open specific apps (e.g., Chrome, KakaoPage).</li>
+            <li><span class="premium">Custom Commands</span>: You can change the commands to words you prefer, such as "Next" or "Go" instead of "Down".</li>
+            <li><span class="premium">Mode Switching</span>: Use the cycle button to instantly apply optimized settings for <code>Webtoon Mode</code>, <code>News Mode</code>, and <code>Reels Mode</code>.</li>
+            <li><span class="premium">Fine Tuning</span>: You can finely adjust the scroll speed, movement distance, and pause time for each mode in 0.1-second increments.</li>
+        </ul>
+    </div>
+    
+    <h2>4. Tips & Precautions</h2>
+    <div class="feature">
+        <ul>
+            <li><strong>24-Hour Free Trial</strong>: Watch a 30-second ad to use all premium features for free for 24 hours.</li>
+            <li><strong>Long Press Stop Button</strong>: Long press the Stop (■) button on the floating menu to instantly exit the VoiceScroll service.</li>
+            <li><strong>Safe Area</strong>: To prevent conflicts with the system top bar, gestures operate within the center 80% area of the screen.</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        © 2024 Raon Asset. All rights reserved.<br>
+        Contact: voicescroll.help@gmail.com
+    </div>
 </div>
 
-<h2>4. 꿀팁 및 주의사항</h2>
-<div class="feature">
-    <ul>
-        <li><strong>24시간 무료 체험</strong>: 광고 30초 시청 시 24시간 동안 모든 프리미엄 기능을 무료로 이용할 수 있습니다.</li>
-        <li><strong>정지 버튼 길게 누르기</strong>: 플로팅 버튼 중 정지(■) 버튼을 길게 누르면 보이스스크롤 서비스가 즉시 종료됩니다.</li>
-        <li><strong>안전 범위</strong>: 시스템 상단 바와의 충돌을 방지하기 위해 화면의 중앙 80% 영역 내에서 제스처가 작동합니다.</li>
-    </ul>
-</div>
+<script>
+    function setLang(lang) {
+        // Update button styles
+        document.getElementById('btn-ko').className = (lang === 'ko') ? 'active' : '';
+        document.getElementById('btn-en').className = (lang === 'en') ? 'active' : '';
+        
+        // Show/hide content blocks
+        const koElements = document.querySelectorAll('[data-lang="ko"]');
+        const enElements = document.querySelectorAll('[data-lang="en"]');
+        
+        if (lang === 'ko') {
+            koElements.forEach(el => el.style.display = 'block');
+            enElements.forEach(el => el.style.display = 'none');
+            document.title = "VoiceScroll 사용설명서";
+            document.documentElement.lang = "ko";
+        } else {
+            koElements.forEach(el => el.style.display = 'none');
+            enElements.forEach(el => el.style.display = 'block');
+            document.title = "VoiceScroll User Manual";
+            document.documentElement.lang = "en";
+        }
+    }
 
-<div class="footer">
-    © 2024 Raon Asset. All rights reserved.<br>
-    문의: voicescroll.help@gmail.com
-</div>
-</body> </html>
+    // Auto-detect browser language on load
+    window.onload = function() {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang && !userLang.startsWith('ko')) {
+            setLang('en');
+        }
+    };
+</script>
+</body>
+</html>
