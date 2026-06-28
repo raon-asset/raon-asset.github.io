@@ -1,369 +1,48 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoiceScroll 사용설명서</title>
-    <!-- Google Fonts: Outfit & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(20, 26, 42, 0.65);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --accent-color: #00e5ff;
-            --accent-gradient: linear-gradient(135deg, #00e5ff 0%, #3d8bff 100%);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --shadow-glow: rgba(0, 229, 255, 0.15);
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(61, 139, 255, 0.05) 0%, transparent 40%);
-            background-attachment: fixed;
-        }
-        header {
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--card-border);
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .lang-switch {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .lang-btn.active, .lang-btn:hover {
-            background: var(--accent-gradient);
-            border-color: transparent;
-            box-shadow: 0 4px 12px var(--shadow-glow);
-        }
-        main {
-            max-width: 1200px;
-            margin: 2.5rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2.5rem;
-        }
-        /* Sidebar Navigation */
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            height: calc(100vh - 140px);
-            overflow-y: auto;
-            padding-right: 1rem;
-        }
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: var(--card-border);
-            border-radius: 4px;
-        }
-        .sidebar-menu {
-            list-style: none;
-        }
-        .sidebar-menu li {
-            margin-bottom: 0.5rem;
-        }
-        .sidebar-menu a {
-            color: var(--text-muted);
-            text-decoration: none;
-            display: block;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .sidebar-menu a:hover, .sidebar-menu a.active {
-            color: var(--accent-color);
-            background: rgba(0, 229, 255, 0.06);
-            padding-left: 1.25rem;
-        }
-        /* Content Sections */
-        .content-area {
-            display: flex;
-            flex-direction: column;
-            gap: 3.5rem;
-        }
-        section {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
-            transition: transform 0.3s ease;
-        }
-        section:hover {
-            transform: translateY(-2px);
-        }
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        .lead-text {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-        h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(0, 229, 255, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
-            margin: 1.8rem 0 1rem 0;
-            color: var(--accent-color);
-        }
-        p {
-            margin-bottom: 1.2rem;
-            color: #cbd5e1;
-        }
-        ul, ol {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-            color: #cbd5e1;
-        }
-        li {
-            margin-bottom: 0.5rem;
-        }
-        /* Feature Cards */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(0, 229, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-        .feature-card-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .feature-card-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-        .feature-card-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        /* Commands Table */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-        th {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--card-border);
-        }
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--card-border);
-            color: #cbd5e1;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .badge-cmd {
-            background: rgba(0, 229, 255, 0.12);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            color: var(--accent-color);
-            padding: 0.2rem 0.5rem;
-            border-radius: 6px;
-            font-family: monospace;
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        /* Highlight block */
-        .tip-box {
-            background: rgba(61, 139, 255, 0.08);
-            border-left: 4px solid #3d8bff;
-            border-radius: 0 16px 16px 0;
-            padding: 1.25rem 1.5rem;
-            margin: 1.5rem 0;
-            color: #cbd5e1;
-        }
-        .tip-title {
-            font-weight: 600;
-            color: #93c5fd;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        footer {
-            text-align: center;
-            padding: 3rem 1.5rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--card-border);
-            font-size: 0.9rem;
-            margin-top: 5rem;
-        }
-        /* Multilingual show/hide logic */
-        [lang-group] {
-            display: none;
-        }
-        
-        body.lang-ko [lang-group="ko"],
-        body.lang-en [lang-group="en"] {
-            display: block;
-        }
-        @media (max-width: 900px) {
-            main {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                display: none;
-            }
-            section {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body class="lang-ko">
-    <header>
-        <div class="header-container">
-            <div class="logo">MantraView</div>
-            <div class="lang-switch">
-                <button class="lang-btn active" onclick="setLanguage('ko')">한국어</button>
-                <button class="lang-btn" onclick="setLanguage('en')">English</button>
-            </div>
-        </div>
-    </header>
-    <main>
-       
-    </main>
-    <footer>
-        <div lang-group="ko">
-            <p>&copy; 2026 MantraView. All rights reserved. 출시 버전 가이드라인 준수.</p>
-        </div>
-        <div lang-group="en">
-            <p>&copy; 2026 MantraView. All rights reserved. Release Build Compliance.</p>
-        </div>
-    </footer>
-    <script>
-        function setLanguage(lang) {
-            document.body.className = 'lang-' + lang;
-            
-            // Toggle active class on language buttons
-            const btns = document.querySelectorAll('.lang-btn');
-            btns.forEach(btn => btn.classList.remove('active'));
-            
-            if (lang === 'ko') {
-                btns[0].classList.add('active');
-            } else {
-                btns[1].classList.add('active');
-            }
-        }
-        function activateMenu(elem) {
-            const menuItems = document.querySelectorAll('.sidebar-menu a');
-            menuItems.forEach(item => item.classList.remove('active'));
-            elem.classList.add('active');
-        }
-        // Smooth scroll spy highlighting
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.sidebar-menu a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 120) {
-                    current = section.getAttribute('id');
-                }
-            });
-            if (current) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+<!DOCTYPE html> <html lang="ko"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>VoiceScroll 사용설명서</title> <style> body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f9; } h1 { color: #0066FF; border-bottom: 2px solid #0066FF; padding-bottom: 10px; } h2 { color: #333; margin-top: 30px; background: #e7efff; padding: 10px; border-left: 5px solid #0066FF; } .feature { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); } .premium { color: #9C27B0; font-weight: bold; } code { background: #eee; padding: 2px 5px; border-radius: 3px; font-weight: bold; } ul { padding-left: 20px; } li { margin-bottom: 8px; } .footer { margin-top: 50px; text-align: center; font-size: 0.9em; color: #777; } </style> </head> <body> <h1>🚀 VoiceScroll 사용설명서 (v1.2.3)</h1> <p>VoiceScroll은 음성 명령을 통해 스마트폰 화면을 손대지 않고 제어할 수 있는 혁신적인 접근성 도구입니다. 웹툰, 뉴스, SNS 등을 이용할 때 최상의 편의성을 제공합니다.</p>
+<h2>1. 시작하기</h2>
+<div class="feature">
+    <ul>
+        <li><strong>서비스 활성화</strong>: 앱 우측 하단의 [서비스 활성화] 버튼을 눌러 안드로이드 설정에서 VoiceScroll 접근성 서비스를 '사용 중'으로 변경하세요.</li>
+        <li><strong>버튼 표시</strong>: 메인 화면의 [시작] 버튼을 누르면 화면에 파란색 플로팅 버튼이 나타납니다.</li>
+        <li><strong>음성 인식 시작</strong>: 플로팅 버튼을 한 번 터치하면 마이크가 활성화되며 음성 명령을 대기합니다.</li>
+    </ul>
+</div>
 
+<h2>2. 기본 음성 명령어</h2>
+<div class="feature">
+    <ul>
+        <li><code>내려</code> / <code>올려</code>: 화면을 1회 살짝 스크롤합니다.</li>
+        <li><code>시작</code>: 아래 방향으로 자동 스크롤을 무한히 시작합니다.</li>
+        <li><code>멈춰</code> / <code>정지</code>: 모든 스크롤 동작을 즉시 중단합니다.</li>
+        <li><code>빨리</code> / <code>천천히</code>: 스크롤이 움직이는 속도를 조절합니다.</li>
+        <li><code>처음으로</code> / <code>끝으로</code>: 화면의 맨 위 또는 맨 아래로 즉시 이동합니다.</li>
+        <li><code>뒤로</code>: 시스템 '뒤로가기' 동작을 수행합니다.</li>
+        <li><code>클릭</code>: 화면의 정중앙을 1회 터치합니다.</li>
+    </ul>
+</div>
+
+<h2>3. 프리미엄 기능 (Premium)</h2>
+<div class="feature">
+    <ul>
+        <li><span class="premium">광고 제거</span>: 앱 내의 모든 배너 및 전면 광고가 사라집니다.</li>
+        <li><span class="premium">자동 실행 앱 설정</span>: 특정 앱(예: 크롬, 카카오페이지)을 열 때 보이스스크롤이 자동으로 켜지도록 설정할 수 있습니다.</li>
+        <li><span class="premium">커스텀 명령어</span>: "내려" 대신 "넥스트", "고" 등 본인이 원하는 단어로 명령어를 바꿀 수 있습니다.</li>
+        <li><span class="premium">모드 전환</span>: 음성으로 <code>웹툰모드</code>, <code>뉴스모드</code>, <code>릴스모드</code>를 말하여 즉시 최적화된 설정을 적용할 수 있습니다.</li>
+        <li><span class="premium">정밀 튜닝</span>: 각 모드별 스크롤 속도, 이동 거리, 대기 시간을 0.1초 단위로 세밀하게 조절 가능합니다.</li>
+    </ul>
+</div>
+
+<h2>4. 꿀팁 및 주의사항</h2>
+<div class="feature">
+    <ul>
+        <li><strong>24시간 무료 체험</strong>: 광고 30초 시청 시 24시간 동안 모든 프리미엄 기능을 무료로 이용할 수 있습니다.</li>
+        <li><strong>정지 버튼 길게 누르기</strong>: 플로팅 버튼 중 정지(■) 버튼을 길게 누르면 보이스스크롤 서비스가 즉시 종료됩니다.</li>
+        <li><strong>안전 범위</strong>: 시스템 상단 바와의 충돌을 방지하기 위해 화면의 중앙 80% 영역 내에서 제스처가 작동합니다.</li>
+    </ul>
+</div>
+
+<div class="footer">
+    © 2024 Raon Asset. All rights reserved.<br>
+    문의: raon-asset@github.io
+</div>
+</body> </html>
