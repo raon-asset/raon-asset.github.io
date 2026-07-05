@@ -35,11 +35,12 @@
         </div>
 
         <h2>2. 데이터 수집 및 처리</h2>
-        <p>ViewReader는 원칙적으로 사용자의 개인정보를 수집하지 않습니다.</p>
+        <p>ViewReader의 핵심 읽기 기능(화면 인식, 번역, 음성 안내)은 원칙적으로 사용자의 개인정보를 수집하지 않습니다.</p>
         <ul>
             <li><strong>텍스트 및 번역 데이터:</strong> Google ML Kit를 사용하여 기기 내에서 로컬로 처리됩니다. 데이터는 클라우드로 전송되지 않습니다.</li>
             <li><strong>음성 데이터:</strong> 기기 기본 TTS(Text-to-Speech) 엔진을 사용하며, 음성 데이터는 기기 밖으로 유출되지 않습니다.</li>
             <li><strong>사용자 설정:</strong> 앱의 설정값(속도, 언어 등)은 사용자의 기기에만 안전하게 저장됩니다.</li>
+            <li><strong>광고 및 결제(Pro 잠금 해제 기능):</strong> 번역 등 Pro 기능은 평생 이용권 결제(Google Play Billing) 또는 보상형 광고 시청(Google AdMob)으로 잠금 해제할 수 있습니다. 보상형 광고를 시청하는 경우, Google AdMob이 광고 식별자 등 기기 정보를 수집·처리할 수 있으며, 결제 시 Google Play Billing이 결제 처리를 위해 필요한 정보를 처리합니다. 이 정보는 Google의 개인정보처리방침에 따라 처리되며, 애플리케이션 자체는 이 데이터를 별도로 수집·저장하지 않습니다.</li>
         </ul>
 
         <h2>3. 타사 서비스 이용</h2>
@@ -47,12 +48,24 @@
         <ul>
             <li>Google ML Kit (텍스트 인식 및 번역 엔진)</li>
             <li>Android System TTS</li>
+            <li>Google AdMob (보상형 광고 – Pro 체험 잠금 해제 시에만 사용)</li>
+            <li>Google Play Billing (평생 이용권 결제 처리)</li>
         </ul>
+        <p>Google이 위 서비스를 통해 수집·처리하는 정보에 대한 자세한 내용은 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보처리방침</a> 및 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google의 광고 기술 정책</a>을 참고해 주세요.</p>
 
-        <h2>4. 면책 조항</h2>
+        <h2>4. 광고 개인정보 설정 및 삭제 요청</h2>
+        <p>광고 ID 등 광고 관련 정보는 기기 설정(설정 &gt; Google &gt; 광고 &gt; 광고 개인 최적화 선택 해제, 또는 광고 ID 재설정)에서 언제든지 직접 제어하거나 초기화할 수 있습니다. 애플리케이션을 삭제하면 Pro 잠금 상태를 포함해 기기에 로컬로 저장된 모든 데이터가 함께 삭제됩니다. 애플리케이션 자체는 별도의 서버 계정을 운영하지 않으므로, 삭제 요청은 위 방법으로 대부분 충족됩니다.</p>
+
+        <h2>5. 이용자의 권리 (GDPR·CCPA 등)</h2>
+        <p>거주 지역의 법률(예: EU/영국의 GDPR, 미국 캘리포니아의 CCPA/CPRA 등)에 따라 이용자는 자신에 관한 정보의 열람, 정정, 삭제, 처리 제한, 이의제기 등을 요청할 권리를 가질 수 있습니다. 애플리케이션 자체는 서버에 개인 데이터를 저장하지 않으며, Google이 처리하는 데이터(광고, 결제)에 대한 권리는 Google의 정책 및 설정을 통해 행사할 수 있습니다. 그 외 문의사항은 아래 이메일로 연락해 주세요.</p>
+
+        <h2>6. 아동 보호</h2>
+        <p>본 애플리케이션은 만 13세 미만 아동을 대상으로 제작되지 않았으며, 아동을 대상으로 데이터를 고의로 수집하지 않습니다. 아동이 본인 정보를 제공했다고 판단되는 경우 아래 이메일로 연락해 주시면 조치하겠습니다.</p>
+
+        <h2>7. 면책 조항</h2>
         <p>당사는 애플리케이션의 사용으로 인해 발생하는 직간접적인 손해에 대해 법적 책임을 지지 않습니다. 사용자는 관련 법규 및 타 서비스(웹툰, 소설 플랫폼 등)의 이용 약관을 준수하여 본 애플리케이션을 사용해야 합니다.</p>
 
-        <h2>5. 문의처</h2>
+        <h2>8. 문의처</h2>
         <p>본 방침이나 앱 사용에 관한 문의사항이 있으시면 아래 이메일로 연락 주시기 바랍니다:</p>
         <p><strong>Email:</strong> <a href="mailto:pantaldev@gmail.com">pantaldev@gmail.com</a></p>
     </section>
@@ -74,11 +87,12 @@
         </div>
 
         <h2>2. Data Collection and Usage</h2>
-        <p>ViewReader does not collect any personal information as a matter of principle.</p>
+        <p>ViewReader's core reading features (screen recognition, translation, voice guidance) do not collect any personal information as a matter of principle.</p>
         <ul>
             <li><strong>Text & Translation Data:</strong> Processed locally using Google ML Kit. No data is sent to the cloud.</li>
             <li><strong>Voice Data:</strong> Uses the device's built-in Text-to-Speech (TTS) engine. Data remains on the device.</li>
             <li><strong>User Settings:</strong> Application preferences (speed, language, etc.) are stored safely on your device only.</li>
+            <li><strong>Ads & Purchases (Pro unlock features):</strong> Pro features such as translation can be unlocked via a one-time lifetime purchase (Google Play Billing) or by watching a rewarded ad (Google AdMob). When you watch a rewarded ad, Google AdMob may collect device information such as advertising identifiers; when you make a purchase, Google Play Billing processes the information necessary to complete the transaction. This data is handled under Google's own privacy policy, and the Application itself does not separately collect or store it.</li>
         </ul>
 
         <h2>3. Third-Party Services</h2>
@@ -86,18 +100,30 @@
         <ul>
             <li>Google ML Kit (OCR & Translation Engine)</li>
             <li>Android System TTS</li>
+            <li>Google AdMob (Rewarded ads – used only when unlocking a Pro trial)</li>
+            <li>Google Play Billing (Lifetime purchase processing)</li>
         </ul>
+        <p>For details on how Google collects and processes information through the services above, please see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> and <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google's Ads Technology Policy</a>.</p>
 
-        <h2>4. Disclaimer</h2>
+        <h2>4. Ad Privacy Settings & Deletion Requests</h2>
+        <p>You can control or reset advertising identifiers at any time via device settings (Settings &gt; Google &gt; Ads &gt; Opt out of Ads Personalization, or Reset advertising ID). Uninstalling the Application removes all data stored locally on your device, including your Pro unlock status. Since the Application does not operate its own server-side account, most deletion requests are satisfied by the steps above.</p>
+
+        <h2>5. Your Rights (GDPR, CCPA, etc.)</h2>
+        <p>Depending on where you live (e.g., the GDPR in the EU/UK, or the CCPA/CPRA in California, USA), you may have rights to access, correct, delete, restrict the processing of, or object to the processing of your information. The Application itself does not store personal data on any server. Rights related to data processed by Google (ads, payments) can be exercised through Google's own policies and settings. For any other inquiries, please contact us at the email below.</p>
+
+        <h2>6. Children's Privacy</h2>
+        <p>This Application is not directed at children under the age of 13, and we do not knowingly collect data from children. If you believe a child has provided us with personal information, please contact us at the email below so we can take appropriate action.</p>
+
+        <h2>7. Disclaimer</h2>
         <p>The developer is not liable for any direct or indirect damages resulting from the use of this application. Users must comply with applicable laws and the terms of service of any third-party platforms (e.g., Webtoon, Novel platforms) while using this app.</p>
 
-        <h2>5. Contact Us</h2>
+        <h2>8. Contact Us</h2>
         <p>If you have any questions regarding this policy or the application, please contact us at:</p>
         <p><strong>Email:</strong> <a href="mailto:pantaldev@gmail.com">pantaldev@gmail.com</a></p>
     </section>
 
     <footer>
-        &copy; 2024 ViewReader Developer. All rights reserved.<br>
+        &copy; 2026 ViewReader Developer. All rights reserved.<br>
         Last Updated: July 05, 2026
     </footer>
 
