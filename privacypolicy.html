@@ -373,7 +373,7 @@ CPRA상 "공유"에 해당하는 범위 내에서, 귀하는 제2.3조에 설명
 <script>
   function setLang(lang) {
     document.querySelectorAll('[data-lang]').forEach(function (el) {
-      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+      el.style.display = (el.getAttribute('data-lang') === lang) ? 'block' : 'none';
     });
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
