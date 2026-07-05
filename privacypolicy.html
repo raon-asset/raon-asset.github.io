@@ -17,43 +17,51 @@
   .lang-nav {
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(5px);
-    padding: 10px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #e2e2e2;
     margin-bottom: 30px;
     display: flex;
-    gap: 15px;
+    justify-content: center;
+    gap: 20px;
     z-index: 100;
   }
-  .lang-nav a {
-    text-decoration: none;
-    color: #0969da;
+  .lang-nav button {
+    padding: 8px 20px;
+    border: 1px solid #0066FF;
+    background: white;
+    color: #0066FF;
+    border-radius: 20px;
+    cursor: pointer;
     font-weight: bold;
-    font-size: 0.95em;
+    transition: all 0.2s;
+  }
+  .lang-nav button.active {
+    background: #0066FF;
+    color: white;
   }
   h1 { font-size: 1.8em; margin-bottom: 4px; color: #0066FF; }
   h2 { font-size: 1.3em; margin-top: 2em; border-bottom: 1px solid #e2e2e2; padding-bottom: 6px; }
   h3 { font-size: 1.1em; margin-top: 1.5em; }
   .updated { color: #57606a; margin-bottom: 1.5em; font-size: 0.9em; }
   ul { padding-left: 1.3em; }
-  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
-  th, td { border: 1px solid #d0d7de; padding: 8px 10px; text-align: left; font-size: 0.9em; }
-  th { background: #f6f8fa; }
-  footer { margin-top: 4em; color: #57606a; font-size: 0.85em; border-top: 1px solid #e2e2e2; padding-top: 20px; text-align: center; }
-  hr { border: 0; border-top: 2px solid #eee; margin: 50px 0; }
   .box { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; margin: 15px 0; }
+  footer { margin-top: 4em; color: #57606a; font-size: 0.85em; border-top: 1px solid #e2e2e2; padding-top: 20px; text-align: center; }
+
+  /* 기본적으로 두 섹션 모두 보이게 설정 (스크립트 미동작 대비) */
+  .lang-section { display: block; }
 </style>
 </head>
 <body>
 
 <div class="lang-nav">
-  <a href="#ko">🇰🇷 한국어 (Korean)</a>
-  <a href="#en">🇺🇸 English</a>
+  <button id="btn-ko" class="active" onclick="showLang('ko')">🇰🇷 한국어</button>
+  <button id="btn-en" onclick="showLang('en')">🇺🇸 English</button>
 </div>
 
 <!-- ================= KOREAN SECTION ================= -->
-<div id="ko">
+<div id="ko-section" class="lang-section">
   <h1>개인정보처리방침</h1>
   <p class="updated">최종 수정일: <strong>2024년 10월 27일</strong></p>
 
@@ -84,10 +92,8 @@
   이메일: <a href="mailto:voicescroll.help@gmail.com">voicescroll.help@gmail.com</a></p>
 </div>
 
-<hr>
-
 <!-- ================= ENGLISH SECTION ================= -->
-<div id="en">
+<div id="en-section" class="lang-section" style="display:none;">
   <h1>Privacy Policy</h1>
   <p class="updated">Last Updated: <strong>October 27, 2024</strong></p>
 
@@ -120,6 +126,45 @@
 <footer>
   © 2024 Danto. All rights reserved.
 </footer>
+
+<script>
+  function showLang(lang) {
+    const ko = document.getElementById('ko-section');
+    const en = document.getElementById('en-section');
+    const btnKo = document.getElementById('btn-ko');
+    const btnEn = document.getElementById('btn-en');
+
+    if (lang === 'ko') {
+      ko.style.display = 'block';
+      en.style.display = 'none';
+      btnKo.classList.add('active');
+      btnEn.classList.remove('active');
+    } else {
+      ko.style.display = 'none';
+      en.style.display = 'block';
+      btnKo.classList.remove('active');
+      btnEn.classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  // URL 해시값이나 브라우저 언어에 따른 초기 설정
+  window.onload = function() {
+    const hash = window.location.hash;
+    if (hash === '#en') {
+      showLang('en');
+    } else if (hash === '#ko') {
+      showLang('ko');
+    } else {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang.startsWith('ko')) {
+        showLang('ko');
+      } else {
+        showLang('en');
+      }
+    }
+  };
+</script>
 
 </body>
 </html>
