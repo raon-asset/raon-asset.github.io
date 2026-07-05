@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>CleanMile 개인정보처리방침</title>
+<title>CleanMile 개인정보처리방침 / Privacy Policy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root {
@@ -15,7 +15,7 @@
   body {
     background: var(--bg); color: var(--fg);
     font-family: -apple-system, "Pretendard", "Noto Sans KR", sans-serif;
-    max-width: 760px; margin: 0 auto; padding: 40px 24px 80px;
+    max-width: 760px; margin: 0 auto; padding: 24px 24px 80px;
     line-height: 1.7; font-size: 16px;
   }
   h1 { font-size: 26px; margin-bottom: 4px; }
@@ -30,9 +30,31 @@
   table { width: 100%; border-collapse: collapse; margin-top: 8px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--bg); font-size: 14px; }
   th { color: var(--muted); font-weight: 600; }
+
+  .lang-switch {
+    display: flex; justify-content: flex-end; gap: 4px;
+    padding: 12px 0 20px; position: sticky; top: 0;
+  }
+  .lang-switch button {
+    font: inherit; font-size: 14px; font-weight: 600;
+    padding: 6px 16px; border-radius: 999px; border: 1px solid var(--accent);
+    background: transparent; color: var(--accent); cursor: pointer;
+  }
+  .lang-switch button[aria-pressed="true"] {
+    background: var(--accent); color: var(--bg);
+  }
+  [data-lang-content] { display: none; }
+  [data-lang-content].active { display: block; }
 </style>
 </head>
 <body>
+
+<div class="lang-switch" role="group" aria-label="Language / 언어 선택">
+  <button type="button" data-set-lang="ko" aria-pressed="false">한국어</button>
+  <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+</div>
+
+<div data-lang-content="ko" lang="ko">
 
 <h1>CleanMile 개인정보처리방침</h1>
 <p class="updated">최종 수정일: 2026년 7월 5일 (시행일 이후 변경 시 이 날짜를 갱신합니다)</p>
@@ -93,6 +115,106 @@
 <p><code>pantaldev@gmail.com</code></p>
 <p class="muted">본 방침은 관련 법령 또는 서비스 변경에 따라 사전 고지 후 개정될 수 있습니다.</p>
 </section>
+
+</div>
+
+<div data-lang-content="en" lang="en">
+
+<h1>CleanMile Privacy Policy</h1>
+<p class="updated">Last updated: July 5, 2026 (this date is updated whenever a change takes effect)</p>
+
+<section>
+<p>CleanMile (the "App") is a personal utility app that helps you keep track of cleaning schedules. The App has
+<strong>no sign-up or login feature</strong>, and any cleaning space or task data you enter is
+<strong>stored only on your device</strong>. We do not operate a separate backend server, and the developer does not
+collect, view, or sell your personal data.</p>
+</section>
+
+<h2>1. Information We Collect and Where It's Stored</h2>
+<section>
+<table>
+<tr><th>Item</th><th>Details</th><th>Storage location</th></tr>
+<tr><td>Cleaning spaces / tasks / completion records</td><td>Room names, cleaning tasks, and completion timestamps you enter yourself</td><td>Local database on your device (never sent to a server)</td></tr>
+<tr><td>App settings</td><td>Onboarding completion status, selected theme, notification settings, etc.</td><td>Local storage on your device (never sent to a server)</td></tr>
+<tr><td>Advertising identifier & device info</td><td>Advertising identifier (AAID) and similar data processed by the ad SDK (Google AdMob) to serve ads</td><td>Processed by Google under its own policies</td></tr>
+<tr><td>App usage statistics</td><td>Anonymous, aggregated events such as screen views and button taps (Firebase Analytics)</td><td>Processed by Google under its own policies</td></tr>
+</table>
+<p class="muted">The App does not separately request or collect personally identifiable information such as your name, email address, or phone number.</p>
+</section>
+
+<h2>2. Third-Party Services</h2>
+<section>
+<p>The App uses the third-party SDKs below. Each service's handling of data is governed by that service's own privacy policy.</p>
+<ul>
+  <li><strong>Google AdMob</strong> — Serves banner, interstitial, and rewarded ads. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+  <li><strong>Google UMP (User Messaging Platform)</strong> — Provides a consent management form so users in regulated regions (e.g. the EEA/UK) can confirm their ad consent choices.</li>
+  <li><strong>Firebase Analytics</strong> — Anonymous usage statistics used to improve the App. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a></li>
+</ul>
+</section>
+
+<h2>3. Device Permissions</h2>
+<section>
+<table>
+<tr><th>Permission</th><th>Purpose</th></tr>
+<tr><td>Notifications (POST_NOTIFICATIONS)</td><td>Sends a reminder when a cleaning cycle is due. Even if you decline, the App's core features (checking pollution levels, marking tasks complete) remain fully usable.</td></tr>
+<tr><td>Boot completed (RECEIVE_BOOT_COMPLETED)</td><td>Re-registers scheduled notifications after your device restarts.</td></tr>
+<tr><td>Internet / network state</td><td>Used to deliver ads and send anonymous usage statistics.</td></tr>
+</table>
+</section>
+
+<h2>4. Data Backup and Deletion</h2>
+<section>
+<p>Your cleaning data and settings may be backed up and restored through your Android device's built-in backup
+feature (linked to your Google account). This is stored in your own Google account backup storage, and the
+developer has no access to it. Uninstalling the App deletes all data stored locally on the device.</p>
+</section>
+
+<h2>5. Children's Privacy</h2>
+<section>
+<p>This App is not directed at children under the age of 14, and does not knowingly collect personal information
+from children.</p>
+</section>
+
+<h2>6. Contact</h2>
+<section>
+<p>If you have questions about this privacy policy, please reach out to the email address below.</p>
+<p><code>pantaldev@gmail.com</code></p>
+<p class="muted">This policy may be revised, with prior notice, in accordance with applicable law or changes to the service.</p>
+</section>
+
+</div>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('[data-set-lang]');
+  var panels = document.querySelectorAll('[data-lang-content]');
+  var titles = { ko: 'CleanMile 개인정보처리방침', en: 'CleanMile Privacy Policy' };
+  var STORAGE_KEY = 'cleanmile-privacy-lang';
+
+  function setLang(lang) {
+    panels.forEach(function (panel) {
+      panel.classList.toggle('active', panel.getAttribute('data-lang-content') === lang);
+    });
+    buttons.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === lang));
+    });
+    document.documentElement.setAttribute('lang', lang);
+    if (titles[lang]) document.title = titles[lang];
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+  }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setLang(btn.getAttribute('data-set-lang'));
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  var initial = saved || (navigator.language && navigator.language.toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
+  setLang(initial);
+})();
+</script>
 
 </body>
 </html>
