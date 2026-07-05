@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>CleanMile 개인정보처리방침</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #FAFAFA; --fg: #2A2622; --muted: #6F675C; --card: #F2ECDF; --accent: #00695C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1C1B19; --fg: #E8E4DC; --muted: #C9C0B2; --card: #262420; --accent: #4EBAAA; }
+  }
+
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, "Pretendard", "Noto Sans KR", sans-serif;
+    max-width: 760px; margin: 0 auto; padding: 40px 24px 80px;
+    line-height: 1.7; font-size: 16px;
+  }
+  h1 { font-size: 26px; margin-bottom: 4px; }
+  .updated { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  h2 { font-size: 19px; margin-top: 36px; border-left: 4px solid var(--accent); padding-left: 10px; }
+  section { background: var(--card); border-radius: 16px; padding: 20px 24px; margin: 12px 0; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  a { color: var(--accent); }
+  code { background: var(--bg); padding: 2px 6px; border-radius: 6px; font-size: 0.9em; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--bg); font-size: 14px; }
+  th { color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>CleanMile 개인정보처리방침</h1>
+<p class="updated">최종 수정일: 2026년 7월 5일 (시행일 이후 변경 시 이 날짜를 갱신합니다)</p>
+
+<section>
+<p>CleanMile(이하 "앱")은 청소 주기 관리를 돕는 개인용 유틸리티 앱입니다. 이 앱은 <strong>회원가입이나 로그인 기능이 없으며</strong>,
+사용자가 직접 입력한 청소 공간·항목 데이터는 <strong>사용자의 기기 안에만 저장</strong>됩니다. 별도의 자체 서버를 운영하지 않으며,
+개발자가 사용자의 개인 데이터를 수집·열람·판매하지 않습니다.</p>
+</section>
+
+<h2>1. 수집하는 정보와 저장 위치</h2>
+<section>
+<table>
+<tr><th>항목</th><th>내용</th><th>저장 위치</th></tr>
+<tr><td>청소 공간/항목/완료 기록</td><td>사용자가 직접 입력한 방 이름, 청소 항목, 완료 시각</td><td>기기 내 로컬 데이터베이스(서버 전송 없음)</td></tr>
+<tr><td>앱 설정</td><td>온보딩 완료 여부, 선택한 테마, 알림 설정 등</td><td>기기 내 로컬 저장소(서버 전송 없음)</td></tr>
+<tr><td>광고 식별자 및 기기 정보</td><td>광고 SDK(Google AdMob)가 광고 게재를 위해 처리하는 광고 식별자(AAID) 등</td><td>Google이 자체 정책에 따라 처리</td></tr>
+<tr><td>앱 사용 통계</td><td>화면 조회, 버튼 클릭 등 익명 집계 이벤트(Firebase Analytics)</td><td>Google이 자체 정책에 따라 처리</td></tr>
+</table>
+<p class="muted">앱은 이름, 이메일, 전화번호 등 사용자를 특정할 수 있는 개인정보를 별도로 요구하거나 수집하지 않습니다.</p>
+</section>
+
+<h2>2. 제3자 서비스</h2>
+<section>
+<p>앱은 아래 제3자 SDK를 사용하며, 각 서비스의 데이터 처리는 해당 서비스의 자체 개인정보처리방침을 따릅니다.</p>
+<ul>
+  <li><strong>Google AdMob</strong> — 배너/전면/보상형 광고 게재. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보처리방침</a></li>
+  <li><strong>Google UMP(사용자 메시징 플랫폼)</strong> — EEA/영국 등 규제 지역 사용자에게 광고 동의 여부를 확인하는 동의 관리 폼을 제공합니다.</li>
+  <li><strong>Firebase Analytics</strong> — 앱 개선을 위한 익명 사용 통계. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보처리방침</a></li>
+</ul>
+</section>
+
+<h2>3. 기기 권한</h2>
+<section>
+<table>
+<tr><th>권한</th><th>사용 목적</th></tr>
+<tr><td>알림(POST_NOTIFICATIONS)</td><td>청소 주기 도래 알림 발송. 거부해도 앱의 핵심 기능(오염도 확인, 청소 완료 체크)은 그대로 사용할 수 있습니다.</td></tr>
+<tr><td>부팅 완료(RECEIVE_BOOT_COMPLETED)</td><td>기기 재부팅 후 알림 예약을 다시 등록하기 위함입니다.</td></tr>
+<tr><td>인터넷/네트워크 상태</td><td>광고 및 익명 사용 통계 전송에 사용됩니다.</td></tr>
+</table>
+</section>
+
+<h2>4. 데이터 백업 및 삭제</h2>
+<section>
+<p>Android 기기 백업 기능(사용자의 Google 계정에 연결된 백업)을 통해 청소 데이터와 설정이 백업/복원될 수 있습니다.
+이는 사용자의 Google 계정 백업 저장소에 저장되며 개발자는 이 데이터에 접근할 수 없습니다.
+앱을 삭제하면 기기에 저장된 모든 로컬 데이터가 함께 삭제됩니다.</p>
+</section>
+
+<h2>5. 아동의 개인정보</h2>
+<section>
+<p>본 앱은 만 14세 미만 아동을 대상으로 하지 않으며, 아동으로부터 개인정보를 의도적으로 수집하지 않습니다.</p>
+</section>
+
+<h2>6. 문의처</h2>
+<section>
+<p>개인정보처리방침에 대한 문의는 아래 이메일로 연락해 주세요.</p>
+<p><code>[개발자 연락용 이메일 주소를 여기에 입력하세요]</code></p>
+<p class="muted">본 방침은 관련 법령 또는 서비스 변경에 따라 사전 고지 후 개정될 수 있습니다.</p>
+</section>
+
+</body>
+</html>
