@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라오니 랩 (Raoni Lab)</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>알리에 이런 것도 판다</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                 "Malgun Gothic", sans-serif;
+    background: #0f1216; color: #e8eaed; padding: 24px 16px 64px; line-height: 1.5;
+  }
+  .wrap { max-width: 520px; margin: 0 auto; }
+  .disclosure {
+    background: #1c2129; border: 1px solid #2c333d; border-radius: 10px;
+    padding: 12px 14px; font-size: 13px; color: #aab2bd; margin-bottom: 20px;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { font-size: 14px; color: #8b95a1; margin-bottom: 24px; }
+  .ep {
+    display: flex; align-items: center; gap: 12px;
+    background: #171b21; border: 1px solid #262c35; border-radius: 14px;
+    padding: 16px; margin-bottom: 12px;
+    text-decoration: none; color: inherit;
+    transition: border-color .15s, transform .15s;
+  }
+  .ep:hover { border-color: #3d7dff; transform: translateY(-1px); }
+  .ep.latest { border-color: #3d7dff; background: #17203a; }
+  .num {
+    flex: 0 0 44px; height: 44px; border-radius: 11px; background: #232a33;
+    color: #ffd166; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px;
+  }
+  .meta { flex: 1 1 auto; min-width: 0; }
+  .name { font-size: 15px; font-weight: 600; }
+  .tag { font-size: 12px; color: #8b95a1; margin-top: 2px; }
+  .arrow { color: #6b7480; font-size: 20px; }
+  footer { margin-top: 28px; font-size: 12px; color: #6b7480; text-align: center; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>라오니 랩에 오신 것을 환영합니다</h1>
-        <nav>
-            <ul>
-                <li><a href="about.html">회사 소개</a></li>
-                <li><a href="services.html">서비스</a></li>
-                <li><a href="contact.html">오시는 길</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="wrap">
+  <div class="disclosure">이 포스팅은 알리익스프레스 어필리에이트 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 해외직구 상품은 배송에 1~2주가 소요될 수 있습니다.</div>
+  <h1>알리에 이런 것도 판다</h1>
+  <p class="sub">영상에서 소개한 제품 목록입니다</p>
+  <a class="ep latest" href="ali-weird-ep01.html">
+    <div class="num">1</div>
+    <div class="meta"><div class="name">알리에 이런 것도 판다 ▶1탄</div><div class="tag">최신</div></div>
+    <div class="arrow">&rsaquo;</div>
+  </a>
 
-    <main>
-        <section>
-            <h2>우리의 비전</h2>
-            <p>여기에 웹페이지의 주요 내용을 작성합니다.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Raoni Asset. All rights reserved.</p>
-    </footer>
+  <footer>가격과 재고는 판매처 사정에 따라 변동될 수 있습니다.</footer>
+</div>
 </body>
 </html>
