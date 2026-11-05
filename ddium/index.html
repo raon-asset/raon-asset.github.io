@@ -84,8 +84,7 @@ button:focus-visible,textarea:focus-visible,input:focus-visible+span{outline:2px
 #campList b{font-family:var(--f-display);color:var(--ember);font-variant-numeric:tabular-nums;min-width:1.1em}
 #zoomCtl{position:fixed;right:max(16px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:grid;gap:8px;transition:opacity .6s}
 #zoomCtl button[aria-pressed="false"]{opacity:.4}
-#ambBtn{font-size:1.35rem;font-family:var(--f-display)}
-#sfxBtn{font-size:1rem}
+#ambBtn,#sfxBtn{font-size:1.35rem;font-family:var(--f-display)}
 #zoomCtl button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(13,18,51,.5);color:var(--ink);font-size:1.25rem;line-height:1;backdrop-filter:blur(6px)}
 #fade{position:fixed;inset:0;background:#05071a;opacity:0;pointer-events:none;transition:opacity .35s}
 #fade.on{opacity:1}
@@ -155,7 +154,7 @@ textarea::placeholder,.tin::placeholder{color:rgba(246,234,215,.35)}
   <div class="count"><span class="label">오늘 띄운 풍등</span><b id="todayCount">12,384</b><small id="roomInfo">달빛 호수 3번 방 · 7명</small></div>
 </header>
 <button id="protoBadge" type="button" aria-expanded="false" aria-controls="debug">프로토타입 · 2주차</button>
-<div id="zoomCtl"><button id="ambBtn" type="button" aria-label="배경음 켜고 끄기" aria-pressed="true" title="배경음">♪</button><button id="sfxBtn" type="button" aria-label="효과음 켜고 끄기" aria-pressed="true" title="효과음">🔔</button><button id="zoomIn" type="button" aria-label="확대">＋</button><button id="zoomOut" type="button" aria-label="축소">－</button></div>
+<div id="zoomCtl"><button id="ambBtn" type="button" aria-label="배경음 켜고 끄기" aria-pressed="true" title="배경음">♪</button><button id="sfxBtn" type="button" aria-label="효과음 켜고 끄기" aria-pressed="true" title="효과음">✦</button><button id="zoomIn" type="button" aria-label="확대">＋</button><button id="zoomOut" type="button" aria-label="축소">－</button></div>
 <div id="fade" aria-hidden="true"></div>
 <div id="debug" hidden>
   <div>FPS <b id="fps">–</b> · 풍등 <b id="lanternN">400</b>개</div>
