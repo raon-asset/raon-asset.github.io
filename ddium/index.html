@@ -199,11 +199,6 @@ textarea::placeholder,.tin::placeholder{color:rgba(246,234,215,.35)}
   <form class="sheet" id="sheet" novalidate>
     <h2>어떤 소원을 띄울까요?</h2>
     <div class="field">
-      <label class="lab" for="wish"><span>소원</span><span id="wishLen">0 / 40</span></label>
-      <textarea id="wish" maxlength="40" rows="2" placeholder="예: 올해는 나한테 조금 더 다정하기"></textarea>
-      <p class="err" id="wishErr" role="alert"></p>
-    </div>
-    <div class="field">
       <span class="lab"><span>풍등</span></span>
       <div class="opts" role="radiogroup" aria-label="풍등 종류">
         <label class="opt"><input type="radio" name="style" id="st-hanji" value="hanji" checked><span><i style="color:#ffa852;background:#ffbe73"></i>한지<small>무료</small></span></label>
@@ -218,6 +213,11 @@ textarea::placeholder,.tin::placeholder{color:rgba(246,234,215,.35)}
         <label class="opt"><input type="radio" name="vis" id="vis-public" value="public"><span>하늘에 공개</span></label>
       </div>
       <p class="note">공개한 소원은 금칙어 확인을 거친 뒤 다른 사람이 풍등을 눌렀을 때 보여요. 이름은 표시되지 않아요.<br>프로토타입이라 결제 없이 모든 풍등을 띄울 수 있어요.</p>
+    </div>
+    <div class="field">
+      <label class="lab" for="wish"><span>소원</span><span id="wishLen">0 / 40</span></label>
+      <textarea id="wish" maxlength="40" rows="2" placeholder="예: 올해는 나한테 조금 더 다정하기"></textarea>
+      <p class="err" id="wishErr" role="alert"></p>
     </div>
     <div class="actions">
       <button type="button" class="ghost" id="cancelBtn">취소</button>
@@ -2144,7 +2144,6 @@ function openSheet() {
   SFX.tick();
   closeBubble(); $('cardWrap').hidden = true; sheetWrap.hidden = false; user.state = 'write';
   wishEl.value = ''; $('wishLen').textContent = '0 / 40'; $('wishErr').textContent = '';
-  setTimeout(() => wishEl.focus(), 50);
 }
 $('writeBtn').addEventListener('click', openSheet);
 $('cancelBtn').addEventListener('click', () => { SFX.tick(); sheetWrap.hidden = true; user.state = 'idle'; });
