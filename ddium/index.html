@@ -700,27 +700,36 @@ const pathLamps = [];
 
 // ---------- 아바타 (원작 동글 캐릭터) ----------
 const SKIN = 0xf3d3bd, HAIR = 0x2a2033;
-const AV_COLORS = [[0x3b4a8c, 0xf2c4cf], [0x8c3b4f, 0xf6e3b4], [0x2f6b5e, 0xf4d9c6], [0x5b3b8c, 0xc9e3f2], [0xb4683a, 0xf2ecd9], [0x2e3a5c, 0xffd28a]];
-function makeAvatar([robe, top]) {
+const AV_COLORS = [[0x3b4a8c, 0xf2c4cf], [0x8c3b4f, 0xf6e3b4], [0x2f6b5e, 0xf4d9c6], [0x5b3b8c, 0xc9e3f2], [0xb4683a, 0xf2ecd9], [0x2e3a5c, 0xffd28a], [0x6b4a3a, 0x9fd48a], [0x4a5a3a, 0xf2a68a]];
+// 내 옷 색: 처음 올 때 한 번 정해 이 기기에 기억 (고르는 화면 없음)
+let myColor = Math.floor(Math.random() * AV_COLORS.length);
+try { const v = localStorage.getItem('ddium-avatar'); if (v !== null && AV_COLORS[+v]) myColor = +v; else localStorage.setItem('ddium-avatar', String(myColor)); } catch (e) {}
+function makeAvatar([coat, accent]) {
+  // 성별 신호가 없는 기본 아바타: 두루마기(긴 겉옷) + 털모자 + 목도리. 옷 색만 다름
   const g = new THREE.Group();
-  const mRobe = new THREE.MeshLambertMaterial({ color: robe }), mTop = new THREE.MeshLambertMaterial({ color: top });
-  const mSkin = new THREE.MeshLambertMaterial({ color: SKIN }), mHair = new THREE.MeshLambertMaterial({ color: HAIR });
+  const mCoat = new THREE.MeshLambertMaterial({ color: coat }), mAcc = new THREE.MeshLambertMaterial({ color: accent });
+  const mSkin = new THREE.MeshLambertMaterial({ color: SKIN }), mBelt = new THREE.MeshLambertMaterial({ color: 0x3a2e2a });
   const body = new THREE.Group(); g.add(body);
-  const chima = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.36, 0.5, 14), mRobe); chima.position.y = 0.3; body.add(chima);
-  const jeo = new THREE.Mesh(new THREE.SphereGeometry(0.24, 14, 10), mTop); jeo.scale.set(1, 0.85, 0.9); jeo.position.y = 0.58; body.add(jeo);
-  const ribbon = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.16, 0.03), mRobe); ribbon.position.set(0.05, 0.54, 0.21); ribbon.rotation.z = 0.3; body.add(ribbon);
-  const head = new THREE.Group(); head.position.y = 0.98; body.add(head);
+  const coatM = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.31, 0.64, 16), mCoat); coatM.position.y = 0.4; body.add(coatM);
+  const shoulder = new THREE.Mesh(new THREE.SphereGeometry(0.25, 14, 10), mCoat); shoulder.scale.set(1, 0.55, 0.9); shoulder.position.y = 0.72; body.add(shoulder);
+  const lapel = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.42, 0.02), mAcc); lapel.position.set(0.0, 0.5, 0.3); lapel.rotation.z = 0.08; body.add(lapel);   // 고름 선
+  const belt = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.025, 6, 20), mBelt); belt.rotation.x = Math.PI / 2; belt.position.y = 0.45; body.add(belt);
+  for (const sx of [-1, 1]) { const sl = new THREE.Mesh(new THREE.SphereGeometry(0.1, 10, 8), mCoat); sl.scale.set(0.8, 1.3, 0.8); sl.position.set(sx * 0.27, 0.5, 0.02); body.add(sl); }   // 소매
+  const scarf = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.07, 8, 18), mAcc); scarf.rotation.x = Math.PI / 2; scarf.position.y = 0.8; body.add(scarf);
+  const scarfEnd = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.22, 0.05), mAcc); scarfEnd.position.set(0.16, 0.66, 0.2); scarfEnd.rotation.z = 0.2; body.add(scarfEnd);
+  const head = new THREE.Group(); head.position.y = 1.08; body.add(head);
   head.add(new THREE.Mesh(new THREE.SphereGeometry(0.3, 18, 14), mSkin));
-  const hair = new THREE.Mesh(new THREE.SphereGeometry(0.315, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.55), mHair); hair.rotation.x = -0.35; head.add(hair);
-  const bun = new THREE.Mesh(new THREE.SphereGeometry(0.11, 10, 8), mHair); bun.position.set(0, 0.3, -0.06); head.add(bun);
-  const eyeM = new THREE.MeshBasicMaterial({ color: 0x1a1222 }), blushM = new THREE.MeshBasicMaterial({ color: 0xf29a9a, transparent: true, opacity: 0.7 });
+  const hat = new THREE.Mesh(new THREE.SphereGeometry(0.325, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.5), mAcc); hat.position.y = 0.02; head.add(hat);   // 털모자
+  const brim = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.05, 8, 20), mAcc); brim.rotation.x = Math.PI / 2; brim.position.y = 0.04; head.add(brim);
+  const pom = new THREE.Mesh(new THREE.SphereGeometry(0.08, 10, 8), new THREE.MeshLambertMaterial({ color: 0xf6ead7 })); pom.position.y = 0.36; head.add(pom);
+  const eyeM = new THREE.MeshBasicMaterial({ color: 0x1a1222 }), blushM = new THREE.MeshBasicMaterial({ color: 0xf29a9a, transparent: true, opacity: 0.6 });
   for (const sx of [-1, 1]) {
     const e = new THREE.Mesh(new THREE.SphereGeometry(0.03, 8, 6), eyeM); e.position.set(sx * 0.1, -0.02, 0.28); head.add(e);
     const b = new THREE.Mesh(new THREE.CircleGeometry(0.045, 10), blushM); b.position.set(sx * 0.17, -0.09, 0.255); b.rotation.y = sx * 0.5; head.add(b);
   }
   const feet = [];
-  for (const sx of [-1, 1]) { const f = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 6), mRobe); f.scale.set(1, 0.6, 1.4); f.position.set(sx * 0.11, 0.04, 0.04); g.add(f); feet.push(f); }
-  const arm = new THREE.Group(); arm.position.set(0.24, 0.6, 0.02); body.add(arm);
+  for (const sx of [-1, 1]) { const f = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 6), mBelt); f.scale.set(1, 0.6, 1.4); f.position.set(sx * 0.11, 0.04, 0.04); g.add(f); feet.push(f); }
+  const arm = new THREE.Group(); arm.position.set(0.27, 0.6, 0.02); body.add(arm);
   const stick = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.36, 4), woodDark); stick.rotation.z = -0.9; stick.position.set(0.12, 0.06, 0); arm.add(stick);
   const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.075, 0.13, 8), glowMatBasic); lamp.position.set(0.26, 0.02, 0); arm.add(lamp);
   return { g, body, head, feet, arm, lamp, phase: Math.random() * 10 };
@@ -1590,7 +1599,7 @@ function spawnLanternAt(x, y, z, dirX, dirZ, tint, scale, lit, text, pub) {
 }
 
 // ---------- 내 아바타 / 배 / 예시 방문자 ----------
-const me = { ...makeAvatar([0x2e3a5c, 0xf2c4cf]), x: 0, z: 6, h: Math.PI, path: [], mode: 'walk', moving: false, autoBoard: false };
+const me = { ...makeAvatar(AV_COLORS[myColor]), x: 0, z: 6, h: Math.PI, path: [], mode: 'walk', moving: false, autoBoard: false };
 scene.add(me.g);
 me.g.rotation.order = 'YXZ';
 const tmpW = new THREE.Vector3();
