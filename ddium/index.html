@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#0d1233">
 <meta name="description" content="밤하늘에 소원을 적은 풍등을 띄우는 곳, 띄움.">
 <meta property="og:title" content="띄움 · 밤하늘에 소원을 띄우는 곳">
@@ -107,7 +107,7 @@ button:focus-visible,textarea:focus-visible,input:focus-visible+span{outline:2px
 #prayBtn[aria-pressed="true"]{background:var(--ember);color:#2a1606;border-color:var(--ember)}
 #prayCount{font-variant-numeric:tabular-nums}
 
-.sheet-wrap{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;background:rgba(5,7,22,.45);
+.sheet-wrap{position:fixed;inset:0;height:var(--vvh,100%);top:var(--vvt,0);bottom:auto;display:flex;align-items:flex-end;justify-content:center;background:rgba(5,7,22,.45);
   padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));animation:fade .3s both}
 @keyframes fade{from{opacity:0}}
 .sheet{width:min(520px,100%);background:linear-gradient(180deg,rgba(28,30,72,.96),rgba(16,19,48,.98));border:1px solid var(--line);border-bottom:0;
@@ -1893,6 +1893,7 @@ function openOffer() {
 function syncOffer() { $('offLeft').textContent = `남은 자리 ${LOTUS_SLOTS.length - OFFERS.length}개`; }
 $('offerForm').addEventListener('change', syncOffer);
 $('offWish').addEventListener('input', () => { $('offLen').textContent = `${$('offWish').value.length} / 30`; $('offErr').textContent = ''; });
+$('offWish').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('offerForm').requestSubmit(); } });
 $('offCancel').addEventListener('click', () => { SFX.tick(); offerWrap.hidden = true; user.state = 'idle'; });
 offerWrap.addEventListener('click', (e) => { if (e.target === offerWrap) { offerWrap.hidden = true; user.state = 'idle'; } });
 $('offerForm').addEventListener('submit', (e) => {
@@ -2149,6 +2150,13 @@ $('writeBtn').addEventListener('click', openSheet);
 $('cancelBtn').addEventListener('click', () => { SFX.tick(); sheetWrap.hidden = true; user.state = 'idle'; });
 sheetWrap.addEventListener('click', (e) => { if (e.target === sheetWrap) { sheetWrap.hidden = true; user.state = 'idle'; } });
 wishEl.addEventListener('input', () => { $('wishLen').textContent = `${wishEl.value.length} / 40`; $('wishErr').textContent = ''; });
+// 자판의 엔터(↵)로도 바로 준비하기
+wishEl.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('sheet').requestSubmit(); } });
+// 자판이 올라오면 그만큼 창을 줄여 버튼이 자판 위로 올라오게 (Android Chrome은 고정 요소가 자판 뒤에 숨음)
+if (window.visualViewport) {
+  const vv = window.visualViewport, fit = () => { document.documentElement.style.setProperty('--vvh', vv.height + 'px'); document.documentElement.style.setProperty('--vvt', vv.offsetTop + 'px'); };
+  vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); fit();
+}
 $('sheet').addEventListener('submit', (e) => {
   e.preventDefault();
   const v = wishEl.value.trim();
